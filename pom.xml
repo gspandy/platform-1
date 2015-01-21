@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hundsun.fcloud.platform</groupId>
+    <artifactId>platform</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <modules>
+        <module>assemblies</module>
+        <module>version</module>
+        <module>maven</module>
+        <module>spring</module>
+        <module>servlet</module>
+    </modules>
+
+    <packaging>pom</packaging>
+    <name>FCloud Platform</name>
+
+    <repositories>
+        <repository>
+            <id>hs-repo</id>
+            <url>http://repos.hundsun.com:6060/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>hs-repo</id>
+            <url>http://repos.hundsun.com:6060/nexus/content/groups/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>hundsun_fund_dept4_hosted_release</id>
+            <url>http://repos.hundsun.com:6060/nexus/content/repositories/hundsun_fund_dept4_hosted_release</url>
+        </repository>
+        <snapshotRepository>
+            <id>hundsun_fund_dept4_hosted_snapshot</id>
+            <url>http://repos.hundsun.com:6060/nexus/content/repositories/hundsun_fund_dept4_hosted_snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- fcloud platform -->
+            <dependency>
+                <groupId>com.hundsun.fcloud.platform.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hundsun.fcloud.platform.servlet</groupId>
+                <artifactId>servlet-codec</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hundsun.fcloud.platform.servlet</groupId>
+                <artifactId>servlet-runner</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hundsun.fcloud.platform.servlet</groupId>
+                <artifactId>servlet-caller</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.hundsun.fcloud.platform.spring</groupId>
+                <artifactId>spring-osgi-io</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hundsun.fcloud.platform.spring</groupId>
+                <artifactId>spring-osgi-context</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- spring -->
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.aopalliance</artifactId>
+                <version>1.0_6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.spring-aop</artifactId>
+                <version>${spring.osgi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.spring-core</artifactId>
+                <version>${spring.osgi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.spring-beans</artifactId>
+                <version>${spring.osgi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.spring-context</artifactId>
+                <version>${spring.osgi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.spring-web</artifactId>
+                <version>${spring.osgi.version}</version>
+            </dependency>
+
+            <!-- netty -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-transport</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-codec</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-handler</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+
+            <!-- osgi -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.core</artifactId>
+                <version>${osgi.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.compendium</artifactId>
+                <version>${osgi.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- servlet api -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.0.1</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- commons -->
+            <dependency>
+                <groupId>commons-pool</groupId>
+                <artifactId>commons-pool</artifactId>
+                <version>1.6</version>
+            </dependency>
+
+            <!-- for logging -->
+            <dependency>
+                <groupId>org.ops4j.pax.logging</groupId>
+                <artifactId>pax-logging-api</artifactId>
+                <version>1.7.4</version>
+            </dependency>
+
+            <!-- for testing -->
+            <dependency>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-test-blueprint</artifactId>
+                <version>${camel.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.4</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>2.5.0</version>
+                    <extensions>true</extensions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.karaf.tooling</groupId>
+                    <artifactId>karaf-maven-plugin</artifactId>
+                    <version>${karaf.version}</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <properties>
+        <osgi.version>4.3.1</osgi.version>
+        <slf4j.version>1.7.7</slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
+        <camel.version>2.14.0</camel.version>
+        <netty.version>4.0.24.Final</netty.version>
+
+        <spring.version>3.2.12.RELEASE_1</spring.version>
+        <spring.osgi.version>3.2.12.RELEASE_1</spring.osgi.version>
+
+        <!-- for platform-->
+        <java.min.mem>512m</java.min.mem>
+        <java.max.mem>1024m</java.max.mem>
+        <java.perm.mem>256m</java.perm.mem>
+        <java.max.perm.mem>512m</java.max.perm.mem>
+        <karaf.version>3.0.2</karaf.version>
+        <karaf.instance>fcloud</karaf.instance>
+        <karaf.username>fcloud</karaf.username>
+        <karaf.password>fcloud</karaf.password>
+        <fcloud.version>${project.version}</fcloud.version>
+
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+</project>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper>
+    <!-- public in -->
+    <property name="funcNo" direction="in">
+        <column name="funcNo" length="2"/>
+    </property>
+    <property name="entrust" direction="in">
+        <column name="entrust" length="1" />
+    </property>
+    <property name="netNo" direction="in">
+        <column name="netNo" length="9" />
+    </property>
+    <property name="operatorCode" direction="in">
+        <column name="operatorCode" length="8" />
+    </property>
+    <property name="projectName" direction="in">
+        <column name="projectName" length="12" />
+    </property>
+    <property name="reserve1" direction="in">
+        <column name="reserve1" length="100" />
+    </property>
+    <!-- private in -->
+    <property name="requestNo" direction="in">
+        <column name="requestNo" length="24" />
+    </property>
+    <property name="balance" direction="in">
+        <column name="balance" length="16" />
+    </property>
+    <property name="operateCode" direction="in">
+        <column name="operateCode" length="1" />
+    </property>
+    <property name="tradeAcco" direction="in">
+        <column name="tradeAcco" length="17" />
+    </property>
+    <property name="fundCode" direction="in">
+        <column name="fundCode" length="6" />
+    </property>
+    <property name="bizCode" direction="in">
+        <column name="bizCode" length="3" />
+    </property>
+    <property name="reserve2" direction="in">
+        <column name="reserve2" length="100" />
+    </property>
+
+    <!-- public out -->
+    <property name="flag" direction="out">
+        <column name="flag" length="1" />
+    </property>
+    <property name="errorCode" direction="out">
+        <column name="errorCode" length="4" />
+    </property>
+    <property name="errorMsg" direction="out">
+        <column name="errorMsg" length="46" />
+    </property>
+    <property name="reserve3" direction="out">
+        <column name="reserve3" length="40" />
+    </property>
+    <!-- private out -->
+    <property name="reserve4" direction="out">
+        <column name="reserve4" length="40" />
+    </property>
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.hundsun.com/fcloud/schema/blueprint-servlet"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.hundsun.com/fcloud/schema/blueprint-servlet"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified">
+
+    <xsd:element name="annotation-driven"/>
+
+</xsd:schema>

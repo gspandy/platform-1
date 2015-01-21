@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features name="fcloud-${fcloud.version}"
+          xmlns="http://karaf.apache.org/xmlns/features/v1.2.1"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.1 http://karaf.apache.org/xmlns/features/v1.2.1">
+
+    <feature name="fcloud-netty" description="FCloud Netty Feature" version="${fcloud.version}">
+        <bundle>mvn:io.netty/netty-common/${netty.version}</bundle>
+        <bundle>mvn:io.netty/netty-buffer/${netty.version}</bundle>
+        <bundle>mvn:io.netty/netty-transport/${netty.version}</bundle>
+        <bundle>mvn:io.netty/netty-codec/${netty.version}</bundle>
+        <bundle>mvn:io.netty/netty-handler/${netty.version}</bundle>
+    </feature>
+
+    <!--<feature name="fcloud-spring" description="FCloud Spring Feature" version="${fcloud.version}">
+        <bundle>mvn:com.hundsun.fcloud.spring/spring-osgi-io/${fcloud.version}</bundle>
+        <bundle>mvn:com.hundsun.fcloud.spring/spring-osgi-context/${fcloud.version}</bundle>
+    </feature>-->
+
+    <feature name="fcloud-servlet" description="FCloud Servlet Feature" version="${fcloud.version}">
+        <feature>fcloud-netty</feature>
+        <!-- Spring Osgi -->
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.spring-core/${spring.version}</bundle>
+        <bundle>mvn:com.hundsun.fcloud.platform.spring/spring-osgi-io/${fcloud.version}</bundle>
+        <!-- Servlet Implements -->
+        <bundle>mvn:com.hundsun.fcloud.servlet/servlet-api/${fcloud.version}</bundle>
+        <bundle>mvn:com.hundsun.fcloud.servlet/servlet-codec/${fcloud.version}</bundle>
+        <bundle>mvn:com.hundsun.fcloud.servlet/servlet-runner/${fcloud.version}</bundle>
+    </feature>
+
+</features>
