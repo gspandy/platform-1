@@ -15,7 +15,13 @@
 
     <name>FCloud Platform :: Bundles</name>
     <modules>
+        <!-- spring modules -->
+        <module>spring-osgi-io</module>
+        <module>spring-osgi-context</module>
+        <module>spring-osgi-web</module>
+        <!-- spring modules -->
         <module>fastjson</module>
+        <module>zookeeper</module>
     </modules>
 
 </project>

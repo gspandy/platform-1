@@ -16,7 +16,7 @@
         <feature>fcloud-netty</feature>
         <!-- Spring Osgi -->
         <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.spring-core/${spring.version}</bundle>
-        <bundle>mvn:org.springframework.osgi/spring-osgi-io/${fcloud.version}</bundle>
+        <bundle>mvn:com.hundsun.fcloud.bundles/spring-osgi-io/${fcloud.version}</bundle>
         <!-- Servlet Implements -->
         <bundle>mvn:com.hundsun.fcloud.servlet/servlet-api/${fcloud.version}</bundle>
         <bundle>mvn:com.hundsun.fcloud.servlet/servlet-codec/${fcloud.version}</bundle>

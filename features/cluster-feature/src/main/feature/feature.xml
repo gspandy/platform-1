@@ -6,6 +6,7 @@
 
     <feature name="fcloud-cluster" description="FCloud Cluster Feature" version="${fcloud.version}">
         <bundle>mvn:org.apache.curator/curator-framework/${curator.version}</bundle>
+        <bundle>mvn:com.hundsun.fcloud.bundles/zookeeper/${zookeeper.version}</bundle>
         <bundle>mvn:com.hundsun.fcloud.bundles/fastjson/${fastjson.version}</bundle>
 
         <bundle>mvn:com.hundsun.fcloud.cluster/node/${fcloud.version}</bundle>

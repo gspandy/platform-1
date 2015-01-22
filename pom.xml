@@ -13,7 +13,6 @@
         <module>features</module>
         <module>maven</module>
         <module>bundles</module>
-        <module>spring</module>
         <module>servlet</module>
         <module>cluster</module>
     </modules>
@@ -76,12 +75,12 @@
             </dependency>
 
             <dependency>
-                <groupId>org.springframework.osgi</groupId>
+                <groupId>com.hundsun.fcloud.bundles</groupId>
                 <artifactId>spring-osgi-io</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.osgi</groupId>
+                <groupId>com.hundsun.fcloud.bundles</groupId>
                 <artifactId>spring-osgi-context</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -160,18 +159,16 @@
                         <groupId>jline</groupId>
                         <artifactId>jline</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.zookeeper</groupId>
+                        <artifactId>zookeeper</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.apache.zookeeper</groupId>
+                <groupId>com.hundsun.fcloud.bundles</groupId>
                 <artifactId>zookeeper</artifactId>
                 <version>${zookeeper.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-api</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
 
             <dependency>
@@ -214,6 +211,12 @@
                 <artifactId>pax-logging-api</artifactId>
                 <version>1.7.4</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty</artifactId>
+                <version>3.7.0.Final</version>
             </dependency>
 
             <!-- for testing -->
