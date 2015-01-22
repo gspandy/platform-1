@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>servlet</artifactId>
-        <groupId>com.hundsun.fcloud.platform.servlet</groupId>
+        <groupId>com.hundsun.fcloud.servlet</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -30,11 +30,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.hundsun.fcloud.platform.servlet</groupId>
+            <groupId>com.hundsun.fcloud.servlet</groupId>
             <artifactId>servlet-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.hundsun.fcloud.platform.servlet</groupId>
+            <groupId>com.hundsun.fcloud.servlet</groupId>
             <artifactId>servlet-codec</artifactId>
         </dependency>
         <dependency>
@@ -62,7 +62,7 @@
             <artifactId>org.apache.servicemix.bundles.spring-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.hundsun.fcloud.platform.spring</groupId>
+            <groupId>com.hundsun.fcloud.spring</groupId>
             <artifactId>spring-osgi-io</artifactId>
         </dependency>
 

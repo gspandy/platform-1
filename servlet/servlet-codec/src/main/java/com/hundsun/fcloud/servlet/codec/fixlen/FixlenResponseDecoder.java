@@ -20,15 +20,15 @@ import java.util.List;
  */
 public class FixlenResponseDecoder extends MessageToMessageDecoder<ByteBuf> {
 
-    private static final int FIX_LEN = 4;
+    //private static final int FIX_LEN = 4;
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf byteBuf, List<Object> out) throws Exception {
         //
-        byte[] lengthBytes = new byte[FIX_LEN];
-        byteBuf.readBytes(lengthBytes);
-        int length = Integer.parseInt(new String(lengthBytes));
-        ByteBuf msgBuf = Unpooled.buffer(length - FIX_LEN);
+        //byte[] lengthBytes = new byte[FIX_LEN];
+        //byteBuf.readBytes(lengthBytes);
+        //int length = Integer.parseInt(new String(lengthBytes));
+        ByteBuf msgBuf = Unpooled.buffer(byteBuf.readableBytes());
         //
         msgBuf.writeBytes(byteBuf, byteBuf.readableBytes());
         //

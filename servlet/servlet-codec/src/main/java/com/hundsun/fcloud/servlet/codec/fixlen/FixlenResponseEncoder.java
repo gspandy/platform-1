@@ -30,9 +30,9 @@ public class FixlenResponseEncoder extends MessageToMessageEncoder<ServletRespon
         CodecConfig codecConfig = CodecConfigUtils.getMapped(codec);
         //
         byte[] message = FixlenMessageCodec.encode(response, codecConfig, false);
-        String numberStr = formatNumber(FIX_LEN + message.length);
+        //String numberStr = formatNumber(FIX_LEN + message.length);
         ByteBuf byteBuf = Unpooled.buffer(FIX_LEN + message.length);
-        byteBuf.writeBytes(numberStr.getBytes());
+        //byteBuf.writeBytes(numberStr.getBytes());
         byteBuf.writeBytes(message);
         //
         out.add(byteBuf);

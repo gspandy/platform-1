@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>assemblies</artifactId>
-        <groupId>com.hundsun.fcloud.platform.assemblies</groupId>
+        <groupId>com.hundsun.fcloud.assemblies</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hundsun.fcloud.platform</groupId>
+    <groupId>com.hundsun.fcloud</groupId>
     <artifactId>container</artifactId>
     <packaging>karaf-assembly</packaging>
     <name>FCloud Platform :: Assemblies :: Container</name>
