@@ -9,6 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>org.springframework.osgi</groupId>
     <artifactId>spring-osgi-io</artifactId>
     <packaging>bundle</packaging>
 

@@ -5,14 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hundsun.fcloud</groupId>
-    <artifactId>platform</artifactId>
+    <artifactId>fcloud</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <modules>
-        <module>assemblies</module>
         <module>version</module>
+        <module>container</module>
+        <module>features</module>
         <module>maven</module>
+        <module>bundles</module>
         <module>spring</module>
         <module>servlet</module>
+        <module>cluster</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -67,12 +70,18 @@
             </dependency>
 
             <dependency>
-                <groupId>com.hundsun.fcloud.spring</groupId>
+                <groupId>com.hundsun.fcloud.cluster</groupId>
+                <artifactId>node</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.osgi</groupId>
                 <artifactId>spring-osgi-io</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.hundsun.fcloud.spring</groupId>
+                <groupId>org.springframework.osgi</groupId>
                 <artifactId>spring-osgi-context</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -124,6 +133,51 @@
                 <groupId>io.netty</groupId>
                 <artifactId>netty-handler</artifactId>
                 <version>${netty.version}</version>
+            </dependency>
+
+            <!-- zookeeper -->
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-client</artifactId>
+                <version>${curator.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>jline</groupId>
+                        <artifactId>jline</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>${zookeeper.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.hundsun.fcloud.bundles</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
 
             <!-- osgi -->
@@ -216,11 +270,14 @@
         <log4j.version>1.2.17</log4j.version>
         <camel.version>2.14.0</camel.version>
         <netty.version>4.0.24.Final</netty.version>
+        <curator.version>2.7.1</curator.version>
+        <fastjson.version>1.2.4</fastjson.version>
+        <zookeeper.version>3.4.6</zookeeper.version>
 
         <spring.version>3.2.12.RELEASE_1</spring.version>
         <spring.osgi.version>3.2.12.RELEASE_1</spring.osgi.version>
 
-        <!-- for platform-->
+        <!-- for fcloud-->
         <java.min.mem>512m</java.min.mem>
         <java.max.mem>1024m</java.max.mem>
         <java.perm.mem>256m</java.perm.mem>

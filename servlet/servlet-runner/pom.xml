@@ -62,7 +62,7 @@
             <artifactId>org.apache.servicemix.bundles.spring-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.hundsun.fcloud.spring</groupId>
+            <groupId>org.springframework.osgi</groupId>
             <artifactId>spring-osgi-io</artifactId>
         </dependency>
 

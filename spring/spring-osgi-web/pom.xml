@@ -9,6 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>org.springframework.osgi</groupId>
     <artifactId>spring-osgi-web</artifactId>
     <packaging>bundle</packaging>
 
@@ -25,7 +26,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.hundsun.fcloud.spring</groupId>
+            <groupId>org.springframework.osgi</groupId>
             <artifactId>spring-osgi-context</artifactId>
         </dependency>
         <dependency>
