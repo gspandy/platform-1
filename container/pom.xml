@@ -20,12 +20,6 @@
             <artifactId>framework</artifactId>
             <version>${karaf.version}</version>
             <type>kar</type>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.eclipse</groupId>
-                    <artifactId>org.eclipse.osgi</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <!-- scope is runtime so the feature repo is listed in etc/org.apache.karaf.features.cfg file, and features will installed into the system directory -->

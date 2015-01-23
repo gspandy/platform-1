@@ -3,23 +3,26 @@ package com.hundsun.fcloud.servlet.caller.impl;
 import com.hundsun.fcloud.servlet.api.ServletRequest;
 import com.hundsun.fcloud.servlet.api.ServletResponse;
 import com.hundsun.fcloud.servlet.caller.ServletCaller;
+import com.hundsun.fcloud.servlet.caller.ServletCallerException;
 import org.apache.commons.pool.BasePoolableObjectFactory;
 import org.apache.commons.pool.ObjectPool;
 import org.apache.commons.pool.impl.GenericObjectPool;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Created by Gavin Hu on 2015/1/4.
  */
 public class PoolableServletCaller implements ServletCaller {
 
-    private static final Logger logger = LoggerFactory.getLogger(PoolableServletCaller.class);
+    private static final int DEFAULT_CALL_TIMEOUT = 3;
 
     private ObjectPool<ServletCaller> servletCallerObjectPool;
 
     public PoolableServletCaller(String host, int port, int poolSize) {
-        this.servletCallerObjectPool = new GenericObjectPool(new PoolableServletCallerFactory(host, port), poolSize);
+        this(host, port, poolSize, DEFAULT_CALL_TIMEOUT);
+    }
+
+    public PoolableServletCaller(String host, int port, int poolSize, int timeout) {
+        this.servletCallerObjectPool = new GenericObjectPool(new PoolableServletCallerFactory(host, port, timeout), poolSize);
     }
 
     @Override
@@ -34,7 +37,7 @@ public class PoolableServletCaller implements ServletCaller {
             this.servletCallerObjectPool.returnObject(servletCaller);
             //
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            throw new ServletCallerException(e.getMessage(), e);
         }
         return response;
     }
@@ -44,7 +47,7 @@ public class PoolableServletCaller implements ServletCaller {
         try {
             this.servletCallerObjectPool.close();
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
+            throw new ServletCallerException(e.getMessage(), e);
         }
     }
 
@@ -54,14 +57,20 @@ public class PoolableServletCaller implements ServletCaller {
 
         private int port;
 
-        public PoolableServletCallerFactory(String host, int port) {
+        private int timeout;
+
+        public PoolableServletCallerFactory(String host, int port, int timeout) {
             this.host = host;
             this.port = port;
+            this.timeout = timeout;
         }
 
         @Override
         public ServletCaller makeObject() throws Exception {
-            return new SimpleServletCaller(host, port);
+            SimpleServletCaller servletCaller =  new SimpleServletCaller(host, port);
+            servletCaller.setTimeout(timeout);
+            //
+            return servletCaller;
         }
 
         @Override

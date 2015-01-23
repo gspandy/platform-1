@@ -12,7 +12,7 @@
     <artifactId>servlet-runner</artifactId>
     <packaging>bundle</packaging>
 
-    <name>FCloud Platform :: Bundles :: Servlet Runner</name>
+    <name>FCloud Platform :: Servlet :: Servlet Runner</name>
 
     <build>
         <plugins>

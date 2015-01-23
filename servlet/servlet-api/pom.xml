@@ -11,7 +11,7 @@
 
     <artifactId>servlet-api</artifactId>
     <packaging>bundle</packaging>
-    <name>FCloud Platform :: Bundles :: Servlet API</name>
+    <name>FCloud Platform :: Servlet :: Servlet API</name>
 
     <build>
         <plugins>

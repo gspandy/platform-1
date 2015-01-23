@@ -3,6 +3,7 @@ package com.hundsun.fcloud.servlet.caller.impl;
 import com.hundsun.fcloud.servlet.api.ServletRequest;
 import com.hundsun.fcloud.servlet.api.ServletResponse;
 import com.hundsun.fcloud.servlet.caller.ServletCaller;
+import com.hundsun.fcloud.servlet.caller.ServletCallerException;
 import com.hundsun.fcloud.servlet.codec.fixlen.FixlenRequestEncoder;
 import com.hundsun.fcloud.servlet.codec.fixlen.FixlenResponseDecoder;
 import io.netty.bootstrap.Bootstrap;
@@ -12,11 +13,14 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Gavin Hu on 2014/12/29.
  */
 public class SimpleServletCaller extends ChannelInboundHandlerAdapter implements ServletCaller {
+
+    private int timeout = 3; // SECOND
 
     private Channel channel;
 
@@ -43,6 +47,10 @@ public class SimpleServletCaller extends ChannelInboundHandlerAdapter implements
         //
         ChannelFuture f = b.connect(host, port).syncUninterruptibly();
         this.channel = f.channel();
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
     }
 
     @Override
@@ -85,12 +93,12 @@ public class SimpleServletCaller extends ChannelInboundHandlerAdapter implements
 
         public ServletResponse get() {
             try {
-                latch.await();
+                latch.await(timeout, TimeUnit.SECONDS);
+                return response;
             } catch (InterruptedException e) {
-                e.printStackTrace();
-                return null;
+                throw new ServletCallerException(e.getMessage(), e);
             }
-            return response;
+
         }
     }
 
