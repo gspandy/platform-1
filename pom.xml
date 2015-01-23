@@ -70,7 +70,7 @@
 
             <dependency>
                 <groupId>com.hundsun.fcloud.cluster</groupId>
-                <artifactId>node</artifactId>
+                <artifactId>cluster-node</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -115,6 +115,14 @@
                 <groupId>org.apache.servicemix.bundles</groupId>
                 <artifactId>org.apache.servicemix.bundles.spring-web</artifactId>
                 <version>${spring.osgi.version}</version>
+            </dependency>
+
+            <!-- karaf -->
+            <dependency>
+                <groupId>org.apache.karaf.instance</groupId>
+                <artifactId>org.apache.karaf.instance.core</artifactId>
+                <version>${karaf.version}</version>
+                <scope>provided</scope>
             </dependency>
 
             <!-- netty -->

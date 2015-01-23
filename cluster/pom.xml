@@ -17,7 +17,7 @@
     <name>FCloud Platform :: Cluster</name>
 
     <modules>
-        <module>node</module>
+        <module>cluster-node</module>
     </modules>
 
 </project>

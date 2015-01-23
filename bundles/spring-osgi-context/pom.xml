@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hundsun.fcloud.bundles</groupId>
-    <artifactId>spring-osgi-context</artifactId>
+    <artifactId>com.hundsun.fcloud.bundles.spring-osgi-context</artifactId>
     <packaging>bundle</packaging>
 
     <name>FCloud Platform :: Bundles :: Spring OSGi Context</name>

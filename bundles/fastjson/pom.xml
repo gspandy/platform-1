@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hundsun.fcloud.bundles</groupId>
-    <artifactId>fastjson</artifactId>
+    <artifactId>com.hundsun.fcloud.bundles.fastjson</artifactId>
     <version>${fastjson.version}</version>
     <packaging>bundle</packaging>
 

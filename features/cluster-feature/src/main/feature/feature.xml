@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<features name="fcloud-${fcloud.version}"
+<features name="fcloud-cluster-${fcloud.version}"
           xmlns="http://karaf.apache.org/xmlns/features/v1.2.1"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.1 http://karaf.apache.org/xmlns/features/v1.2.1">
 
-    <feature name="fcloud-cluster" description="FCloud Cluster Feature" version="${fcloud.version}">
+    <feature name="cluster-node" description="FCloud Cluster Node Feature" version="${fcloud.version}">
+        <bundle>mvn:io.netty/netty/3.7.0.Final</bundle>
+        <bundle>mvn:com.google.guava/guava/16.0.1</bundle>
+        <bundle>mvn:org.apache.curator/curator-client/${curator.version}</bundle>
         <bundle>mvn:org.apache.curator/curator-framework/${curator.version}</bundle>
         <bundle>mvn:com.hundsun.fcloud.bundles/zookeeper/${zookeeper.version}</bundle>
         <bundle>mvn:com.hundsun.fcloud.bundles/fastjson/${fastjson.version}</bundle>
 
-        <bundle>mvn:com.hundsun.fcloud.cluster/node/${fcloud.version}</bundle>
+        <bundle>mvn:com.hundsun.fcloud.cluster/cluster-node/${fcloud.version}</bundle>
     </feature>
 
 </features>

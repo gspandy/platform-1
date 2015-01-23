@@ -30,7 +30,7 @@
     <dependencies>
         <dependency>
             <groupId>com.hundsun.fcloud.cluster</groupId>
-            <artifactId>node</artifactId>
+            <artifactId>cluster-node</artifactId>
         </dependency>
     </dependencies>
 
