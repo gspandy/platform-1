@@ -64,9 +64,9 @@ public interface MethodVisitor {
      * @param operand the operand of the instruction to be visited.<br>
      * When opcode is BIPUSH, operand value should be between Byte.MIN_VALUE and Byte.MAX_VALUE.<br>
      * When opcode is SIPUSH, operand value should be between Short.MIN_VALUE and Short.MAX_VALUE.<br>
-     * When opcode is NEWARRAY, operand value should be one of {@link com.alibaba.fastjson.asm.Opcodes#T_BOOLEAN}, {@link com.alibaba.fastjson.asm.Opcodes#T_CHAR},
-     * {@link com.alibaba.fastjson.asm.Opcodes#T_FLOAT}, {@link com.alibaba.fastjson.asm.Opcodes#T_DOUBLE}, {@link com.alibaba.fastjson.asm.Opcodes#T_BYTE}, {@link com.alibaba.fastjson.asm.Opcodes#T_SHORT},
-     * {@link com.alibaba.fastjson.asm.Opcodes#T_INT} or {@link com.alibaba.fastjson.asm.Opcodes#T_LONG}.
+     * When opcode is NEWARRAY, operand value should be one of {@link Opcodes#T_BOOLEAN}, {@link Opcodes#T_CHAR},
+     * {@link Opcodes#T_FLOAT}, {@link Opcodes#T_DOUBLE}, {@link Opcodes#T_BYTE}, {@link Opcodes#T_SHORT},
+     * {@link Opcodes#T_INT} or {@link Opcodes#T_LONG}.
      */
     void visitIntInsn(int opcode, int operand);
 
@@ -87,7 +87,7 @@ public interface MethodVisitor {
      * @param opcode the opcode of the type instruction to be visited. This opcode is either NEW, ANEWARRAY, CHECKCAST
      * or INSTANCEOF.
      * @param type the operand of the instruction to be visited. This operand must be the internal name of an object or
-     * array class (see {@link com.alibaba.fastjson.asm.Type#getInternalName() getInternalName}).
+     * array class (see {@link Type#getInternalName() getInternalName}).
      */
     void visitTypeInsn(int opcode, String type);
 
@@ -97,9 +97,9 @@ public interface MethodVisitor {
      * 
      * @param opcode the opcode of the type instruction to be visited. This opcode is either GETSTATIC, PUTSTATIC,
      * GETFIELD or PUTFIELD.
-     * @param owner the internal name of the field's owner class (see {@link com.alibaba.fastjson.asm.Type#getInternalName() getInternalName}).
+     * @param owner the internal name of the field's owner class (see {@link Type#getInternalName() getInternalName}).
      * @param name the field's name.
-     * @param desc the field's descriptor (see {@link com.alibaba.fastjson.asm.Type Type}).
+     * @param desc the field's descriptor (see {@link Type Type}).
      */
     void visitFieldInsn(int opcode, String owner, String name, String desc);
 
@@ -108,10 +108,10 @@ public interface MethodVisitor {
      * 
      * @param opcode the opcode of the type instruction to be visited. This opcode is either INVOKEVIRTUAL,
      * INVOKESPECIAL, INVOKESTATIC, INVOKEINTERFACE or INVOKEDYNAMIC.
-     * @param owner the internal name of the method's owner class (see {@link com.alibaba.fastjson.asm.Type#getInternalName() getInternalName})
-     * or {@link Opcodes#INVOKEDYNAMIC_OWNER}.
+     * @param owner the internal name of the method's owner class (see {@link Type#getInternalName() getInternalName})
+     * or {@link com.alibaba.fastjson.asm.Opcodes#INVOKEDYNAMIC_OWNER}.
      * @param name the method's name.
-     * @param desc the method's descriptor (see {@link com.alibaba.fastjson.asm.Type Type}).
+     * @param desc the method's descriptor (see {@link Type Type}).
      */
     void visitMethodInsn(int opcode, String owner, String name, String desc);
 
@@ -129,7 +129,7 @@ public interface MethodVisitor {
     /**
      * Visits a label. A label designates the instruction that will be visited just after it.
      * 
-     * @param label a {@link com.alibaba.fastjson.asm.Label Label} object.
+     * @param label a {@link Label Label} object.
      */
     void visitLabel(Label label);
 
@@ -141,7 +141,7 @@ public interface MethodVisitor {
      * Visits a LDC instruction.
      * 
      * @param cst the constant to be loaded on the stack. This parameter must be a non null {@link Integer}, a
-     * {@link Float}, a {@link Long}, a {@link Double} a {@link String} (or a {@link com.alibaba.fastjson.asm.Type} for <tt>.class</tt>
+     * {@link Float}, a {@link Long}, a {@link Double} a {@link String} (or a {@link Type} for <tt>.class</tt>
      * constants, for classes whose version is 49.0 or more).
      */
     void visitLdcInsn(Object cst);

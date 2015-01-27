@@ -18,6 +18,7 @@
 
     <modules>
         <module>cluster-node</module>
+        <module>cluster-test</module>
     </modules>
 
 </project>

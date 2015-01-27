@@ -37,7 +37,7 @@ package com.alibaba.fastjson.asm;
 final class FieldWriter implements FieldVisitor {
 
     /**
-     * Next field writer (see {@link com.alibaba.fastjson.asm.ClassWriter#firstField firstField}).
+     * Next field writer (see {@link ClassWriter#firstField firstField}).
      */
     FieldWriter       next;
 
@@ -61,12 +61,12 @@ final class FieldWriter implements FieldVisitor {
     // ------------------------------------------------------------------------
 
     /**
-     * Constructs a new {@link com.alibaba.fastjson.asm.FieldWriter}.
+     * Constructs a new {@link FieldWriter}.
      * 
      * @param cw the class writer to which this field must be added.
-     * @param access the field's access flags (see {@link com.alibaba.fastjson.asm.Opcodes}).
+     * @param access the field's access flags (see {@link Opcodes}).
      * @param name the field's name.
-     * @param desc the field's descriptor (see {@link com.alibaba.fastjson.asm.Type}).
+     * @param desc the field's descriptor (see {@link Type}).
      * @param signature the field's signature. May be <tt>null</tt>.
      * @param value the field's constant value. May be <tt>null</tt>.
      */

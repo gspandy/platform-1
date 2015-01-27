@@ -48,14 +48,14 @@ public class ByteVector {
     int    length;
 
     /**
-     * Constructs a new {@link com.alibaba.fastjson.asm.ByteVector ByteVector} with a default initial size.
+     * Constructs a new {@link ByteVector ByteVector} with a default initial size.
      */
     public ByteVector(){
         data = new byte[64];
     }
 
     /**
-     * Constructs a new {@link com.alibaba.fastjson.asm.ByteVector ByteVector} with the given initial size.
+     * Constructs a new {@link ByteVector ByteVector} with the given initial size.
      * 
      * @param initialSize the initial size of the byte vector to be constructed.
      */

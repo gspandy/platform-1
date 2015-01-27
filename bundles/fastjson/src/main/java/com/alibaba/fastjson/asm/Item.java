@@ -89,7 +89,7 @@ final class Item {
     Item   next;
 
     /**
-     * Constructs an uninitialized {@link com.alibaba.fastjson.asm.Item}.
+     * Constructs an uninitialized {@link Item}.
      */
     Item(){
     }

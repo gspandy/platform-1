@@ -206,19 +206,19 @@ public class ClassWriter {
     static final int        UTF8                    = 1;
 
     /**
-     * Normal type Item stored in the ClassWriter {@link com.alibaba.fastjson.asm.ClassWriter#typeTable}, instead of the constant pool, in order
+     * Normal type Item stored in the ClassWriter {@link ClassWriter#typeTable}, instead of the constant pool, in order
      * to avoid clashes with normal constant pool items in the ClassWriter constant pool's hash table.
      */
     static final int        TYPE_NORMAL             = 13;
 
     /**
-     * Uninitialized type Item stored in the ClassWriter {@link com.alibaba.fastjson.asm.ClassWriter#typeTable}, instead of the constant pool, in
+     * Uninitialized type Item stored in the ClassWriter {@link ClassWriter#typeTable}, instead of the constant pool, in
      * order to avoid clashes with normal constant pool items in the ClassWriter constant pool's hash table.
      */
     static final int        TYPE_UNINIT             = 14;
 
     /**
-     * Merged type Item stored in the ClassWriter {@link com.alibaba.fastjson.asm.ClassWriter#typeTable}, instead of the constant pool, in order
+     * Merged type Item stored in the ClassWriter {@link ClassWriter#typeTable}, instead of the constant pool, in order
      * to avoid clashes with normal constant pool items in the ClassWriter constant pool's hash table.
      */
     static final int        TYPE_MERGED             = 15;
@@ -269,7 +269,7 @@ public class ClassWriter {
      * from scratch. This array associates to each index <tt>i</tt> the Item whose index is <tt>i</tt>. All Item objects
      * stored in this array are also stored in the {@link #items} hash table. These two arrays allow to retrieve an Item
      * from its index or, conversely, to get the index of an Item from its value. Each Item stores an internal name in
-     * its {@link com.alibaba.fastjson.asm.Item#strVal1} field.
+     * its {@link Item#strVal1} field.
      */
     Item[]                  typeTable;
 
@@ -422,7 +422,7 @@ public class ClassWriter {
     }
 
     /**
-     * Constructs a new {@link com.alibaba.fastjson.asm.ClassWriter} object.
+     * Constructs a new {@link ClassWriter} object.
      * 
      * @param flags option flags that can be used to modify the default behavior of this class. See
      * {@link #COMPUTE_MAXS}, {@link #COMPUTE_FRAMES}.
@@ -528,7 +528,7 @@ public class ClassWriter {
      * already contains a similar item.
      * 
      * @param cst the value of the constant to be added to the constant pool. This parameter must be an {@link Integer},
-     * a {@link Float}, a {@link Long}, a {@link Double}, a {@link String} or a {@link com.alibaba.fastjson.asm.Type}.
+     * a {@link Float}, a {@link Long}, a {@link Double}, a {@link String} or a {@link Type}.
      * @return a new or already existing constant item with the given value.
      */
     Item newConstItem(final Object cst) {

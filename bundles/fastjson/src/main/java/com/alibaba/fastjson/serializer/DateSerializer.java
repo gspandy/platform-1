@@ -42,7 +42,7 @@ public class DateSerializer implements ObjectSerializer {
 
         if (out.isEnabled(SerializerFeature.WriteClassName)) {
             if (object.getClass() != fieldType) {
-                if (object.getClass() == Date.class) {
+                if (object.getClass() == java.util.Date.class) {
                     out.write("new Date(");
                     out.writeLongAndChar(((Date) object).getTime(), ')');
                 } else {

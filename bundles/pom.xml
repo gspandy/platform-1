@@ -22,6 +22,10 @@
         <!-- spring modules -->
         <module>fastjson</module>
         <module>zookeeper</module>
+        <module>jresplus-common</module>
+        <module>jresplus-mvc</module>
+        <module>hessian</module>
+        <module>jresplus-ui</module>
     </modules>
 
 </project>

@@ -14,15 +14,8 @@
         </cm:default-properties>
     </cm:property-placeholder>
 
-    <reference id="instanceService" interface="org.apache.karaf.instance.core.InstanceService"/>
-
-    <bean id="nodeInstance" class="com.hundsun.fcloud.cluster.node.NodeInstance">
-        <property name="instanceService" ref="instanceService"/>
-    </bean>
-
-    <bean class="com.hundsun.fcloud.cluster.node.NodeActivator"
-            init-method="start" destroy-method="stop">
-        <property name="nodeInstance" ref="nodeInstance"/>
+    <bean id="zkConnection" class="com.hundsun.fcloud.cluster.node.internal.ZkConnection"
+            init-method="connect" destroy-method="disconnect">
         <property name="retryPolicy" ref="retryPolicy"/>
         <property name="connectionString" value="${zookeeper.cluster}"/>
         <property name="sessionTimeout" value="${zookeeper.sessionTimeout}"/>
@@ -33,5 +26,19 @@
         <argument index="0" value="${zookeeper.retryPolicy.sleepTime}" />
         <argument index="1" value="${zookeeper.retryPolicy.maxRetries}" />
     </bean>
+
+    <reference id="instanceService" interface="org.apache.karaf.instance.core.InstanceService"/>
+
+    <bean class="com.hundsun.fcloud.cluster.node.internal.NodeRegister"
+            init-method="start" destroy-method="stop">
+        <property name="zkConnection" ref="zkConnection"/>
+        <property name="instanceService" ref="instanceService"/>
+    </bean>
+
+    <bean id="nodeService" class="com.hundsun.fcloud.cluster.node.internal.NodeServiceImpl">
+        <property name="zkConnection" ref="zkConnection"/>
+    </bean>
+
+    <service ref="nodeService" interface="com.hundsun.fcloud.cluster.node.NodeService"/>
 
 </blueprint>

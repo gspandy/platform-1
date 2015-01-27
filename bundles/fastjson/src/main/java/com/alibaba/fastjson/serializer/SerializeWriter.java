@@ -237,7 +237,7 @@ public final class SerializeWriter extends Writer {
      * Writes the contents of the buffer to another character stream.
      * 
      * @param out the output stream to write to
-     * @throws java.io.IOException If an I/O error occurs.
+     * @throws IOException If an I/O error occurs.
      */
     public void writeTo(Writer out) throws IOException {
         if (this.writer != null) {

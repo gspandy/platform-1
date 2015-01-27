@@ -216,6 +216,7 @@ public class ParserConfig {
         } catch (Throwable e) {
             // skip
         }
+        
     }
 
     public boolean isAsmEnable() {

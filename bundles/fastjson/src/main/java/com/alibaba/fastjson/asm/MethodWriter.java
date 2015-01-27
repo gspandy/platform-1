@@ -88,7 +88,7 @@ class MethodWriter implements MethodVisitor {
     static final int   FULL_FRAME                              = 255;             // ff
 
     /**
-     * Next method writer (see {@link com.alibaba.fastjson.asm.ClassWriter#firstMethod firstMethod}).
+     * Next method writer (see {@link ClassWriter#firstMethod firstMethod}).
      */
     MethodWriter       next;
 
@@ -158,12 +158,12 @@ class MethodWriter implements MethodVisitor {
     // ------------------------------------------------------------------------
 
     /**
-     * Constructs a new {@link com.alibaba.fastjson.asm.MethodWriter}.
+     * Constructs a new {@link MethodWriter}.
      * 
      * @param cw the class writer in which the method must be added.
-     * @param access the method's access flags (see {@link com.alibaba.fastjson.asm.Opcodes}).
+     * @param access the method's access flags (see {@link Opcodes}).
      * @param name the method's name.
-     * @param desc the method's descriptor (see {@link com.alibaba.fastjson.asm.Type}).
+     * @param desc the method's descriptor (see {@link Type}).
      * @param signature the method's signature. May be <tt>null</tt>.
      * @param exceptions the internal names of the method's exceptions. May be <tt>null</tt>.
      * @param computeMaxs <tt>true</tt> if the maximum stack size and number of local variables must be automatically

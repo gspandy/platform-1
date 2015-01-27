@@ -9,6 +9,7 @@
         <bundle>mvn:com.google.guava/guava/16.0.1</bundle>
         <bundle>mvn:org.apache.curator/curator-client/${curator.version}</bundle>
         <bundle>mvn:org.apache.curator/curator-framework/${curator.version}</bundle>
+        <bundle>mvn:org.apache.curator/curator-recipes/${curator.version}</bundle>
         <bundle>mvn:com.hundsun.fcloud.bundles/zookeeper/${zookeeper.version}</bundle>
         <bundle>mvn:com.hundsun.fcloud.bundles/fastjson/${fastjson.version}</bundle>
 

@@ -53,6 +53,7 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.alibaba.fastjson.annotation.JSONType;
+import com.alibaba.fastjson.asm.ASMException;
 import com.alibaba.fastjson.parser.Feature;
 import com.alibaba.fastjson.parser.JSONScanner;
 import com.alibaba.fastjson.parser.ParserConfig;
@@ -327,8 +328,8 @@ public class TypeUtils {
             return (java.sql.Date) value;
         }
 
-        if (value instanceof Date) {
-            return new java.sql.Date(((Date) value).getTime());
+        if (value instanceof java.util.Date) {
+            return new java.sql.Date(((java.util.Date) value).getTime());
         }
 
         long longValue = 0;
@@ -366,8 +367,8 @@ public class TypeUtils {
             return (java.sql.Timestamp) value;
         }
 
-        if (value instanceof Date) {
-            return new java.sql.Timestamp(((Date) value).getTime());
+        if (value instanceof java.util.Date) {
+            return new java.sql.Timestamp(((java.util.Date) value).getTime());
         }
 
         long longValue = 0;
@@ -1399,5 +1400,24 @@ public class TypeUtils {
         } catch (AccessControlException error) {
             setAccessibleEnable = false;
         }
+    }
+    
+    public static Class<?> getCollectionItemClass(Type fieldType) {
+        if (fieldType instanceof ParameterizedType) {
+            Class<?> itemClass;
+            Type actualTypeArgument = ((ParameterizedType) fieldType).getActualTypeArguments()[0];
+
+            if (actualTypeArgument instanceof Class) {
+                itemClass = (Class<?>) actualTypeArgument;
+                if (!Modifier.isPublic(itemClass.getModifiers())) {
+                    throw new ASMException("can not create ASMParser");
+                }
+            } else {
+                throw new ASMException("can not create ASMParser");
+            }
+            return itemClass;
+        }
+
+        return Object.class;
     }
 }

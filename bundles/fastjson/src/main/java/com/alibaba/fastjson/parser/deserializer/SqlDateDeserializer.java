@@ -20,7 +20,7 @@ public class SqlDateDeserializer extends AbstractDateDeserializer implements Obj
             return null;
         }
 
-        if (val instanceof Date) {
+        if (val instanceof java.util.Date) {
             val = new java.sql.Date(((Date) val).getTime());
         } else if (val instanceof Number) {
             val = (T) new java.sql.Date(((Number) val).longValue());
@@ -40,7 +40,7 @@ public class SqlDateDeserializer extends AbstractDateDeserializer implements Obj
 
                     DateFormat dateFormat = parser.getDateFormat();
                     try {
-                        Date date = (Date) dateFormat.parse(strVal);
+                        java.util.Date date = (java.util.Date) dateFormat.parse(strVal);
                         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
                         return (T) sqlDate;
                     } catch (ParseException e) {

@@ -197,7 +197,7 @@ public class SerializeConfig extends IdentityHashMap<Type, ObjectSerializer> {
 		} catch (Throwable e) {
 			// skip
 		}
-		
+
 	}
 
 	public ObjectSerializer getObjectWriter(Class<?> clazz) {

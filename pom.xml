@@ -20,7 +20,7 @@
     <packaging>pom</packaging>
     <name>FCloud Platform</name>
 
-    <repositories>
+    <!--<repositories>
         <repository>
             <id>hs-repo</id>
             <url>http://repos.hundsun.com:6060/nexus/content/groups/public</url>
@@ -31,7 +31,7 @@
             <id>hs-repo</id>
             <url>http://repos.hundsun.com:6060/nexus/content/groups/public</url>
         </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories>-->
 
     <distributionManagement>
         <repository>
@@ -113,8 +113,25 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.spring-context-support</artifactId>
+                <version>${spring.osgi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
                 <artifactId>org.apache.servicemix.bundles.spring-web</artifactId>
                 <version>${spring.osgi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.spring-webmvc</artifactId>
+                <version>${spring.osgi.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.apache.servicemix.bundles</groupId>
+                <artifactId>org.apache.servicemix.bundles.velocity</artifactId>
+                <version>1.7_6</version>
             </dependency>
 
             <!-- karaf -->
@@ -174,6 +191,25 @@
                 </exclusions>
             </dependency>
             <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>jline</groupId>
+                        <artifactId>jline</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.zookeeper</groupId>
+                        <artifactId>zookeeper</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
                 <groupId>com.hundsun.fcloud.bundles</groupId>
                 <artifactId>zookeeper</artifactId>
                 <version>${zookeeper.version}</version>
@@ -206,11 +242,27 @@
                 <version>3.0.1</version>
                 <scope>provided</scope>
             </dependency>
+            <!-- validate api -->
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>1.1.0.Final</version>
+            </dependency>
             <!-- commons -->
             <dependency>
                 <groupId>commons-pool</groupId>
                 <artifactId>commons-pool</artifactId>
                 <version>1.6</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.9</version>
             </dependency>
 
             <!-- for logging -->
