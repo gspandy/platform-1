@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<features name="fcloud-servlet-${fcloud.version}"
+<features name="fcloud-${fcloud.version}"
           xmlns="http://karaf.apache.org/xmlns/features/v1.2.1"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.1 http://karaf.apache.org/xmlns/features/v1.2.1">
@@ -12,8 +12,8 @@
         <bundle>mvn:io.netty/netty-codec/${netty.version}</bundle>
         <bundle>mvn:io.netty/netty-handler/${netty.version}</bundle>
         <!-- Spring Osgi -->
-        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.spring-core/${spring.version}</bundle>
-        <bundle>mvn:com.hundsun.fcloud.bundles/spring-osgi-io/${fcloud.version}</bundle>
+        <bundle>mvn:org.springframework/spring-core/${spring.version}</bundle>
+        <bundle>mvn:com.hundsun.fcloud.bundles/spring-osgi-io/${spring.osgi.version}</bundle>
         <!-- Servlet Implements -->
         <bundle>mvn:com.hundsun.fcloud.servlet/servlet-api/${fcloud.version}</bundle>
         <bundle>mvn:com.hundsun.fcloud.servlet/servlet-codec/${fcloud.version}</bundle>

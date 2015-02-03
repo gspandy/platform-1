@@ -1,17 +1,15 @@
 package com.hundsun.jresplus.web.velocity.resolver;
 
-import java.util.Locale;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
+import com.hundsun.jresplus.web.contain.Contain;
+import com.hundsun.jresplus.web.contain.async.AsynchronousContain;
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.context.Context;
 import org.springframework.web.servlet.view.velocity.VelocityToolboxView;
 
-import com.hundsun.jresplus.web.contain.Contain;
-import com.hundsun.jresplus.web.contain.async.AsynchronousContain;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author LeoHu copy by sagahl copy by fish
@@ -47,6 +45,7 @@ public class FixedVelocityLayoutView extends VelocityToolboxView {
 	private String screenContentKey = DEFAULT_SCREEN_CONTENT_KEY;
 
 	private String layoutPrefix = DEFAULT_LAYOUT_KEY;
+
 	private char[] layoutPrefixChars = layoutPrefix.toCharArray();
 
 	private String defaultLayoutName = DefaultLayoutName;
@@ -60,13 +59,17 @@ public class FixedVelocityLayoutView extends VelocityToolboxView {
 		this.screenPrefixChars = prefix.toCharArray();
 	}
 
+	public void setLayoutPrefix(String prefix) {
+		this.layoutPrefixChars = prefix.toCharArray();
+	}
+
 	public void setLayoutUrl(String layoutUrl) {
 		this.layoutUrl = layoutUrl;
-		this.layoutPrefix = layoutUrl.substring(0, layoutUrl.indexOf(Seq) + 1);
+		/*this.layoutPrefix = layoutUrl.substring(0, layoutUrl.indexOf(Seq) + 1);
 		this.layoutPrefixChars = this.layoutPrefix.toCharArray();
 		this.defaultLayoutName = layoutUrl
 				.substring(layoutUrl.indexOf(Seq) + 1);
-		this.defaultLayoutNameChars = this.defaultLayoutName.toCharArray();
+		this.defaultLayoutNameChars = this.defaultLayoutName.toCharArray();*/
 	}
 
 	public void setLayoutKey(String layoutKey) {
@@ -205,4 +208,5 @@ public class FixedVelocityLayoutView extends VelocityToolboxView {
 	public void setLayoutTemplateCache(Map<Object, Template> layoutTemplateCache) {
 		this.layoutTemplateCache = layoutTemplateCache;
 	}
+
 }

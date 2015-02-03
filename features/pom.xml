@@ -18,6 +18,7 @@
     <modules>
         <module>servlet-feature</module>
         <module>cluster-feature</module>
+        <module>jresplus-feature</module>
     </modules>
 
 </project>

@@ -16,31 +16,36 @@
 
 package org.springframework.osgi.web.context.support;
 
+import java.util.Map;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+
 import org.osgi.framework.BundleContext;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.osgi.context.ConfigurableOsgiBundleApplicationContext;
 import org.springframework.osgi.context.support.OsgiBundleXmlApplicationContext;
+import org.springframework.osgi.io.OsgiBundleResourceLoader;
 import org.springframework.ui.context.Theme;
 import org.springframework.ui.context.ThemeSource;
 import org.springframework.ui.context.support.UiApplicationContextUtils;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
+import org.springframework.web.context.ConfigurableWebEnvironment;
 import org.springframework.web.context.ServletConfigAware;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.context.support.ServletContextAwareProcessor;
+import org.springframework.web.context.support.StandardServletEnvironment;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import java.util.Map;
-
 /**
- * OSGi variant for {@link org.springframework.web.context.support.XmlWebApplicationContext}. The implementation
- * mandates that the OSGi bundle context is either set ({@link #setBundleContext(org.osgi.framework.BundleContext)}
+ * OSGi variant for {@link XmlWebApplicationContext}. The implementation
+ * mandates that the OSGi bundle context is either set ({@link #setBundleContext(BundleContext)}
  * before setting the ServletContext or that the given ServletContext contains
  * the BundleContext as an attribute under {@link #BUNDLE_CONTEXT_ATTRIBUTE} (<code>org.springframework.osgi.web.org.osgi.framework.BundleContext</code>).
  *
@@ -52,8 +57,8 @@ import java.util.Map;
  * namespace property (if non-null) under
  * <code>org.springframework.web.context.namespace</code> property.
  *
- * @see org.springframework.web.context.support.XmlWebApplicationContext
- * @see org.springframework.osgi.io.OsgiBundleResourceLoader
+ * @see XmlWebApplicationContext
+ * @see OsgiBundleResourceLoader
  * @see OsgiBundleXmlApplicationContext
  *
  * @author Costin Leau
@@ -93,7 +98,7 @@ public class OsgiBundleXmlWebApplicationContext extends OsgiBundleXmlApplication
 	/**
 	 * {@inheritDoc}
 	 *
-	 * Additionally, if the {@link org.osgi.framework.BundleContext} is not set, it is looked up
+	 * Additionally, if the {@link BundleContext} is not set, it is looked up
 	 * under {@link #BUNDLE_CONTEXT_ATTRIBUTE}.
 	 */
 	public void setServletContext(ServletContext servletContext) {
@@ -130,7 +135,7 @@ public class OsgiBundleXmlWebApplicationContext extends OsgiBundleXmlApplication
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 * Additionally, it also sets the context namespace if it's not initialized
 	 * (null).
 	 */
@@ -165,8 +170,8 @@ public class OsgiBundleXmlWebApplicationContext extends OsgiBundleXmlApplication
 
 	/**
 	 * {@inheritDoc}
-	 * 
-	 * Registers request/session scopes, a {@link org.springframework.web.context.support.ServletContextAwareProcessor},
+	 *
+	 * Registers request/session scopes, a {@link ServletContextAwareProcessor},
 	 * etc.
 	 */
 	protected void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
@@ -183,7 +188,7 @@ public class OsgiBundleXmlWebApplicationContext extends OsgiBundleXmlApplication
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 * Additionally, this implementation published the context namespace under
 	 * <code>org.springframework.context.web.namespace</code> property.
 	 */
@@ -197,7 +202,7 @@ public class OsgiBundleXmlWebApplicationContext extends OsgiBundleXmlApplication
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 * Initializes the theme capability.
 	 */
 	protected void onRefresh() {
@@ -211,14 +216,14 @@ public class OsgiBundleXmlWebApplicationContext extends OsgiBundleXmlApplication
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 * Returns the default location for the root context. Default values are
 	 * "/WEB-INF/applicationContext.xml", and "/WEB-INF/test-servlet.xml" for a
 	 * context with the namespace "test-servlet" (like for a DispatcherServlet
 	 * instance with the servlet-name "test").
-	 * 
-	 * @see org.springframework.web.context.support.XmlWebApplicationContext#getDefaultConfigLocations()
-	 * @see org.springframework.web.context.support.XmlWebApplicationContext#DEFAULT_CONFIG_LOCATION
+	 *
+	 * @see XmlWebApplicationContext#getDefaultConfigLocations()
+	 * @see XmlWebApplicationContext#DEFAULT_CONFIG_LOCATION
 	 */
 	protected String[] getDefaultConfigLocations() {
 		String ns = getNamespace();
@@ -233,16 +238,26 @@ public class OsgiBundleXmlWebApplicationContext extends OsgiBundleXmlApplication
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 * Sets the config locations for this application context in init-param
 	 * style, i.e. with distinct locations separated by commas, semicolons or
 	 * whitespace.
 	 * <p>
 	 * If not set, the implementation may use a default as appropriate.
-	 * 
-	 * @see org.springframework.context.ConfigurableApplicationContext#CONFIG_LOCATION_DELIMITERS
+	 *
+	 * @see ConfigurableApplicationContext#CONFIG_LOCATION_DELIMITERS
 	 */
 	public void setConfigLocation(String location) {
-		setConfigLocations(StringUtils.tokenizeToStringArray(location, ConfigurableApplicationContext.CONFIG_LOCATION_DELIMITERS));
+		setConfigLocations(StringUtils.tokenizeToStringArray(location, CONFIG_LOCATION_DELIMITERS));
 	}
+
+	public ConfigurableWebEnvironment getEnvironment() {
+		return (ConfigurableWebEnvironment) super.getEnvironment();
+	}
+
+	@Override
+	protected ConfigurableEnvironment createEnvironment() {
+		return new StandardServletEnvironment();
+	}
+
 }

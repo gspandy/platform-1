@@ -1,4 +1,4 @@
-package com.hundsun.fcloud.servlet.caller.impl;
+package com.hundsun.fcloud.servlet.caller.simple;
 
 import com.hundsun.fcloud.servlet.api.ServletRequest;
 import com.hundsun.fcloud.servlet.api.ServletResponse;

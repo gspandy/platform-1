@@ -22,6 +22,7 @@ import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Enumeration;
+import java.util.Vector;
 
 import org.apache.commons.logging.Log;
 import org.osgi.framework.Bundle;
@@ -136,7 +137,23 @@ public class BundleDelegatingClassLoader extends ClassLoader {
 			log.trace("Looking for resources " + name);
 
 		Enumeration<URL> enm = this.backingBundle.getResources(name);
-
+		if(enm==null) {
+			Vector<URL> vector = new Vector<URL>();
+			//
+			Bundle[] bundles = this.backingBundle.getBundleContext().getBundles();
+			for(Bundle bundle : bundles) {
+				//
+				Enumeration<URL> urlsEnum = bundle.getResources(name);
+				//
+				while(urlsEnum!=null && urlsEnum.hasMoreElements()) {
+					//
+					vector.add(urlsEnum.nextElement());
+				}
+			}
+			//
+			enm = vector.elements();
+		}
+		//
 		if (trace && enm != null && enm.hasMoreElements())
 			log.trace("Found resource " + name + " at " + this.backingBundle.getLocation());
 

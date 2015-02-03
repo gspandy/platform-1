@@ -13,10 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
@@ -38,7 +35,7 @@ public class ExportPackagePrintMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         //
-        Set<String> exportPackageSet = new LinkedHashSet<String>();
+        Set<String> exportPackageSet = new TreeSet<String>();
         //
         for(Artifact artifact : dependencies) {
             //
@@ -65,9 +62,8 @@ public class ExportPackagePrintMojo extends AbstractMojo {
         try {
             PrintWriter writer = new PrintWriter(exportPackageList);
             //
-            for(String exportPackage : exportPackageSet) {
-                //
-                for(String include : includes) {
+            for(String include : includes) {
+                for(String exportPackage : exportPackageSet) {
                     if(exportPackage.startsWith(include)) {
                         //
                         writer.println(exportPackage + ";resolution:=optional,");

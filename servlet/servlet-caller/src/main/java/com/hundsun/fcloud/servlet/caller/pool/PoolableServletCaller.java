@@ -1,9 +1,10 @@
-package com.hundsun.fcloud.servlet.caller.impl;
+package com.hundsun.fcloud.servlet.caller.pool;
 
 import com.hundsun.fcloud.servlet.api.ServletRequest;
 import com.hundsun.fcloud.servlet.api.ServletResponse;
 import com.hundsun.fcloud.servlet.caller.ServletCaller;
 import com.hundsun.fcloud.servlet.caller.ServletCallerException;
+import com.hundsun.fcloud.servlet.caller.simple.SimpleServletCaller;
 import org.apache.commons.pool.BasePoolableObjectFactory;
 import org.apache.commons.pool.ObjectPool;
 import org.apache.commons.pool.impl.GenericObjectPool;

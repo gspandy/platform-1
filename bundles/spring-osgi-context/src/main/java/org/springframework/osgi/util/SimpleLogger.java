@@ -54,7 +54,6 @@ class SimpleLogger implements Log {
 		th.printStackTrace(System.err);
 	}
 
-	@Override
 	public int getLogLevel() {
 		return 0;
 	}

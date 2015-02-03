@@ -1,17 +1,13 @@
 package com.hundsun.jresplus.web.velocity.resolver;
 
-import java.io.Serializable;
-import java.util.AbstractMap;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.apache.velocity.Template;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
 import org.springframework.web.servlet.view.velocity.VelocityViewResolver;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author LeoHu copy by sagahl copy by fish
@@ -82,10 +78,15 @@ public class FixedVelocityLayoutViewResolver extends VelocityViewResolver {
 
 	@Override
 	protected AbstractUrlBasedView buildView(String viewName) throws Exception {
-		FixedVelocityLayoutView view = (FixedVelocityLayoutView) super
-				.buildView(viewName);
+		FixedVelocityLayoutView view = (FixedVelocityLayoutView) super.buildView(viewName);
 		view.setContentType(this.getContentType());
 		view.setEncoding(this.templateEncoding);
+		//
+		view.setScreenPrefix(this.getPrefix() + "screen/");
+		view.setLayoutPrefix(this.getPrefix() + "layout/");
+		view.setLayoutTemplateCache(this.layoutTemplateCache);
+		view.setUrl(this.getPrefix() + "screen/" + viewName + this.getSuffix());
+		//
 		if (this.velocityEngine != null) {
 			view.setVelocityEngine(this.velocityEngine);
 		}
@@ -98,8 +99,7 @@ public class FixedVelocityLayoutViewResolver extends VelocityViewResolver {
 		if (this.screenContentKey != null) {
 			view.setScreenContentKey(this.screenContentKey);
 		}
-		view.setScreenPrefix(this.getPrefix());
-		view.setLayoutTemplateCache(this.layoutTemplateCache);
+		//
 		return view;
 	}
 
