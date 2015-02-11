@@ -2,12 +2,17 @@ package com.hundsun.fcloud.servlet.caller.pool;
 
 import com.hundsun.fcloud.servlet.api.ServletRequest;
 import com.hundsun.fcloud.servlet.api.ServletResponse;
+import com.hundsun.fcloud.servlet.api.annotation.Servlet;
 import com.hundsun.fcloud.servlet.caller.ServletCaller;
 import com.hundsun.fcloud.servlet.caller.ServletCallerException;
 import com.hundsun.fcloud.servlet.caller.simple.SimpleServletCaller;
 import org.apache.commons.pool.BasePoolableObjectFactory;
 import org.apache.commons.pool.ObjectPool;
 import org.apache.commons.pool.impl.GenericObjectPool;
+
+import java.net.ConnectException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Gavin Hu on 2015/1/4.
@@ -16,29 +21,65 @@ public class PoolableServletCaller implements ServletCaller {
 
     private static final int DEFAULT_CALL_TIMEOUT = 3;
 
-    private ObjectPool<ServletCaller> servletCallerObjectPool;
+    private int index = 0;
 
-    public PoolableServletCaller(String host, int port, int poolSize) {
-        this(host, port, poolSize, DEFAULT_CALL_TIMEOUT);
+    private List<ObjectPool<ServletCaller>> servletCallerObjectPools = new ArrayList<ObjectPool<ServletCaller>>();
+
+    public PoolableServletCaller(String[] hosts, int[] ports, int poolSize) {
+        this(hosts, ports, poolSize, DEFAULT_CALL_TIMEOUT);
     }
 
-    public PoolableServletCaller(String host, int port, int poolSize, int timeout) {
-        this.servletCallerObjectPool = new GenericObjectPool(new PoolableServletCallerFactory(host, port, timeout), poolSize);
+    public PoolableServletCaller(String[] hosts, int[] ports, int poolSize, int timeout) {
+        if(hosts.length!=ports.length) {
+            throw new IllegalArgumentException("Hosts and Ports length miss match！");
+        }
+        //
+        for(int i=0; i<hosts.length; i++) {
+            //
+            String host = hosts[i];
+            int port = ports[i];
+            //
+            ObjectPool<ServletCaller> servletCallerObjectPool = new GenericObjectPool(new PoolableServletCallerFactory(host, port, timeout), poolSize);
+            this.servletCallerObjectPools.add(servletCallerObjectPool);
+        }
     }
+
+    private ThreadLocal<Integer> localCount = new ThreadLocal<Integer>() {
+        @Override
+        protected Integer initialValue() {
+            return 0;
+        }
+    };
 
     @Override
     public ServletResponse call(ServletRequest request) {
         //
         ServletResponse response = null;
         try {
-            ServletCaller servletCaller = this.servletCallerObjectPool.borrowObject();
+            localCount.set(localCount.get() + 1);
+            //
+            if(localCount.get()>servletCallerObjectPools.size()) {
+                throw new ServletCallerException("底层所有链接不可用！");
+            }
+            //
+            if(index>=servletCallerObjectPools.size()) {
+                index=0;
+            }
+            //
+            ObjectPool<ServletCaller> servletCallerObjectPool = servletCallerObjectPools.get(index);
+            ServletCaller servletCaller = servletCallerObjectPool.borrowObject();
             //
             response = servletCaller.call(request);
             //
-            this.servletCallerObjectPool.returnObject(servletCaller);
+            servletCallerObjectPool.returnObject(servletCaller);
             //
+        } catch (ConnectException e) {
+            index++;
+            call(request);
         } catch (Exception e) {
             throw new ServletCallerException(e.getMessage(), e);
+        } finally {
+            localCount.remove();
         }
         return response;
     }
@@ -46,7 +87,9 @@ public class PoolableServletCaller implements ServletCaller {
     @Override
     public void close() {
         try {
-            this.servletCallerObjectPool.close();
+            for(ObjectPool servletCallerObjectPool : servletCallerObjectPools) {
+                servletCallerObjectPool.close();
+            }
         } catch (Exception e) {
             throw new ServletCallerException(e.getMessage(), e);
         }
