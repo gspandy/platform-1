@@ -2,7 +2,6 @@ package com.hundsun.fcloud.servlet.caller.pool;
 
 import com.hundsun.fcloud.servlet.api.ServletRequest;
 import com.hundsun.fcloud.servlet.api.ServletResponse;
-import com.hundsun.fcloud.servlet.api.annotation.Servlet;
 import com.hundsun.fcloud.servlet.caller.ServletCaller;
 import com.hundsun.fcloud.servlet.caller.ServletCallerException;
 import com.hundsun.fcloud.servlet.caller.simple.SimpleServletCaller;
@@ -10,7 +9,7 @@ import org.apache.commons.pool.BasePoolableObjectFactory;
 import org.apache.commons.pool.ObjectPool;
 import org.apache.commons.pool.impl.GenericObjectPool;
 
-import java.net.ConnectException;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +72,7 @@ public class PoolableServletCaller implements ServletCaller {
             //
             servletCallerObjectPool.returnObject(servletCaller);
             //
-        } catch (ConnectException e) {
+        } catch (SocketException e) {
             index++;
             call(request);
         } catch (Exception e) {

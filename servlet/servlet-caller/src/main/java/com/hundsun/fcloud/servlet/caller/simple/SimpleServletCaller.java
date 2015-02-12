@@ -11,6 +11,8 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -20,13 +22,15 @@ import java.util.concurrent.TimeUnit;
  */
 public class SimpleServletCaller extends ChannelInboundHandlerAdapter implements ServletCaller {
 
+    private static final Log log = LogFactory.getLog(SimpleServletCaller.class);
+
     private int timeout = 3; // SECOND
 
     private Channel channel;
 
     private EventLoopGroup workerGroup;
 
-    private ServletResponseCallback callback = new ServletResponseCallback();
+    private ServletResponseCallback callback;
 
     public SimpleServletCaller(String host, int port) {
         //
@@ -56,6 +60,8 @@ public class SimpleServletCaller extends ChannelInboundHandlerAdapter implements
     @Override
     public ServletResponse call(ServletRequest request) {
         //
+        this.callback = new ServletResponseCallback();
+        //
         this.channel.writeAndFlush(request);
         //
         return callback.get();
@@ -80,6 +86,14 @@ public class SimpleServletCaller extends ChannelInboundHandlerAdapter implements
         }
     }
 
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        //
+        log.error(cause.getMessage(), cause);
+        //
+        super.exceptionCaught(ctx, cause);
+    }
+
     private class ServletResponseCallback {
 
         private ServletResponse response;
@@ -93,7 +107,8 @@ public class SimpleServletCaller extends ChannelInboundHandlerAdapter implements
 
         public ServletResponse get() {
             try {
-                latch.await(timeout, TimeUnit.SECONDS);
+                //latch.await(timeout, TimeUnit.SECONDS);
+                latch.await();
                 return response;
             } catch (InterruptedException e) {
                 throw new ServletCallerException(e.getMessage(), e);
