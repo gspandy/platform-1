@@ -3,7 +3,6 @@ package com.hundsun.fcloud.servlet.caller.simple;
 import com.hundsun.fcloud.servlet.api.ServletRequest;
 import com.hundsun.fcloud.servlet.api.ServletResponse;
 import com.hundsun.fcloud.servlet.caller.ServletCaller;
-import com.hundsun.fcloud.servlet.caller.ServletCallerException;
 import com.hundsun.fcloud.servlet.codec.fixlen.FixlenRequestEncoder;
 import com.hundsun.fcloud.servlet.codec.fixlen.FixlenResponseDecoder;
 import io.netty.bootstrap.Bootstrap;
@@ -14,6 +13,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.net.ConnectException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -58,7 +58,7 @@ public class SimpleServletCaller extends ChannelInboundHandlerAdapter implements
     }
 
     @Override
-    public ServletResponse call(ServletRequest request) {
+    public ServletResponse call(ServletRequest request) throws Exception {
         //
         this.callback = new ServletResponseCallback();
         //
@@ -105,15 +105,15 @@ public class SimpleServletCaller extends ChannelInboundHandlerAdapter implements
             latch.countDown();
         }
 
-        public ServletResponse get() {
-            try {
-                //latch.await(timeout, TimeUnit.SECONDS);
-                latch.await();
-                return response;
-            } catch (InterruptedException e) {
-                throw new ServletCallerException(e.getMessage(), e);
-            }
+        public ServletResponse get() throws Exception {
 
+            latch.await(timeout, TimeUnit.SECONDS);
+            //latch.await();
+            if(response==null) {
+                throw new ConnectException("");
+            }
+            //
+            return response;
         }
     }
 

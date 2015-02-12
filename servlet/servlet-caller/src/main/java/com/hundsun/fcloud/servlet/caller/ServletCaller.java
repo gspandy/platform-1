@@ -8,7 +8,7 @@ import com.hundsun.fcloud.servlet.api.ServletResponse;
  */
 public interface ServletCaller {
 
-    ServletResponse call(ServletRequest request);
+    ServletResponse call(ServletRequest request) throws Exception;
 
     void close();
 

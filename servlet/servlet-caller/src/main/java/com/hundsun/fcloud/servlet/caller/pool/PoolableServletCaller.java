@@ -54,6 +54,8 @@ public class PoolableServletCaller implements ServletCaller {
     public ServletResponse call(ServletRequest request) {
         //
         ServletResponse response = null;
+        ServletCaller servletCaller = null;
+        ObjectPool<ServletCaller> servletCallerObjectPool = null;
         try {
             localCount.set(localCount.get() + 1);
             //
@@ -65,16 +67,24 @@ public class PoolableServletCaller implements ServletCaller {
                 index=0;
             }
             //
-            ObjectPool<ServletCaller> servletCallerObjectPool = servletCallerObjectPools.get(index);
-            ServletCaller servletCaller = servletCallerObjectPool.borrowObject();
+            servletCallerObjectPool = servletCallerObjectPools.get(index);
+            servletCaller = servletCallerObjectPool.borrowObject();
             //
             response = servletCaller.call(request);
             //
             servletCallerObjectPool.returnObject(servletCaller);
             //
         } catch (SocketException e) {
+            if(servletCaller!=null) {
+                try {
+                    servletCallerObjectPool.invalidateObject(servletCaller);
+                } catch (Exception e1) {
+                    throw new ServletCallerException(e1.getMessage(), e1);
+                }
+            }
+            //
             index++;
-            call(request);
+            response = call(request);
         } catch (Exception e) {
             throw new ServletCallerException(e.getMessage(), e);
         } finally {
