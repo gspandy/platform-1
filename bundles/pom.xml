@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>fcloud</artifactId>
+        <artifactId>platform</artifactId>
         <groupId>com.hundsun.fcloud</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
@@ -26,6 +26,7 @@
         <module>jresplus-mvc</module>
         <module>hessian</module>
         <module>jresplus-ui</module>
+        <module>javax-servlet-api</module>
     </modules>
 
 </project>

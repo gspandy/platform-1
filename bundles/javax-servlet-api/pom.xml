@@ -11,7 +11,18 @@
 
     <groupId>com.hundsun.fcloud.bundles</groupId>
     <artifactId>javax-servlet-api</artifactId>
+    <packaging>bundle</packaging>
     <version>2.5</version>
 
+    <name>FCloud Platform :: Bundles :: Javax Servlet API</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
