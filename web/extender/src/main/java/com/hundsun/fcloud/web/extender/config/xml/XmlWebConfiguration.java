@@ -69,7 +69,9 @@ public class XmlWebConfiguration implements WebConfiguration {
                     filterConfig.setServletName(XmlUtils.getTextValue(servletNameEle));
                 }
                 if(urlPatternEle!=null) {
-                    filterConfig.getUrlPatterns().add(XmlUtils.getTextValue(urlPatternEle));
+                    String urlPatternStr = XmlUtils.getTextValue(urlPatternEle);
+                    String[] urlPatterns = urlPatternStr.split("\\|");
+                    filterConfig.getUrlPatterns().addAll(Arrays.asList(urlPatterns));
                 }
             }
             //
@@ -99,7 +101,9 @@ public class XmlWebConfiguration implements WebConfiguration {
                 //
                 ServletConfig servletConfig = servletConfigMap.get(XmlUtils.getTextValue(servletNameEle));
                 if(urlPatternEle!=null) {
-                    servletConfig.getUrlPatterns().add(XmlUtils.getTextValue(urlPatternEle));
+                    String urlPatternStr = XmlUtils.getTextValue(urlPatternEle);
+                    String[] urlPatterns = urlPatternStr.split("\\|");
+                    servletConfig.getUrlPatterns().addAll(Arrays.asList(urlPatterns));
                 }
             }
             //
