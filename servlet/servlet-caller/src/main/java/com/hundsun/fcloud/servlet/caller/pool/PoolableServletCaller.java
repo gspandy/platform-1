@@ -86,6 +86,13 @@ public class PoolableServletCaller implements ServletCaller {
             index++;
             response = call(request);
         } catch (Exception e) {
+            if(servletCaller!=null) {
+                try {
+                    servletCallerObjectPool.invalidateObject(servletCaller);
+                } catch (Exception e1) {
+                    throw new ServletCallerException(e1.getMessage(), e1);
+                }
+            }
             throw new ServletCallerException(e.getMessage(), e);
         } finally {
             localCount.remove();
