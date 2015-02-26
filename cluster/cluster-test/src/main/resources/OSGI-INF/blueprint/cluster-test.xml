@@ -4,11 +4,20 @@
            xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.3.0"
            xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
-    <reference id="nodeService" interface="com.hundsun.fcloud.cluster.node.NodeService"/>
+    <!--<reference id="nodeService" interface="com.hundsun.fcloud.cluster.node.NodeService"/>
 
     <bean class="com.hundsun.fcloud.cluster.test.ClusterActivator"
             init-method="start">
         <property name="nodeService" ref="nodeService"/>
-    </bean>
+    </bean>-->
+
+    <bean id="testRunnable" class="com.hundsun.fcloud.cluster.test.TestRunnable"></bean>
+
+    <service ref="testRunnable" interface="java.lang.Runnable">
+        <service-properties>
+            <entry key="org.apache.karaf.scheduler.task.id" value="TestRunnable"/>
+            <entry key="org.apache.karaf.scheduler.task.period" value="1000"/>
+        </service-properties>
+    </service>
 
 </blueprint>

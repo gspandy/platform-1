@@ -21,14 +21,14 @@
             </plugin>
         </plugins>
     </build>
-
+<!--
     <dependencies>
         <dependency>
             <groupId>com.hundsun.fcloud.cluster</groupId>
             <artifactId>cluster-node</artifactId>
             <scope>provided</scope>
         </dependency>
-    </dependencies>
+    </dependencies>-->
 
 
 </project>
