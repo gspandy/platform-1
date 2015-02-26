@@ -13,14 +13,18 @@ public class ForkedHttpServletRequest extends HttpServletRequestWrapper {
 
     private String dispatchPath;
 
-    private Map<String, String[]> parameterMap = new HashMap<String, String[]>();
+    private Map parameterMap;
 
     private Map<String, Object> attributeMap = new HashMap<String, Object>();
 
-    public ForkedHttpServletRequest(HttpServletRequest request, String dispatchPath, Map parameterMap) {
+    public ForkedHttpServletRequest(HttpServletRequest request, String dispatchPath) {
         super(request);
         this.dispatchPath = dispatchPath;
-        this.parameterMap.putAll(parameterMap);
+        this.parameterMap = newParameterMap(request);
+    }
+
+    private Map newParameterMap(HttpServletRequest request) {
+        return new HashMap(request.getParameterMap());
     }
 
     @Override

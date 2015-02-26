@@ -16,6 +16,7 @@
     <name>FCloud Platform :: Web</name>
     <modules>
         <module>extender</module>
+        <module>portal</module>
     </modules>
 
 </project>

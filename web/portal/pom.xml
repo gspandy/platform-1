@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>web</artifactId>
+        <groupId>com.hundsun.fcloud.web</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hundsun.fcloud.web</groupId>
+    <artifactId>portal</artifactId>
+    <packaging>bundle</packaging>
+
+    <name>FCloud Platform :: Web :: Portal</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.hundsun.fcloud.web</groupId>
+            <artifactId>extender</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
